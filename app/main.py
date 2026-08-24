@@ -13,7 +13,7 @@ from app.web import STATIC_ROOT
 from app.web import router as web_router
 
 app = FastAPI(
-    title="USGS 3DEP Elevation Service",
+    title="Logic Cloud Geo Terrain Elevation API",
     summary="Retrieve bare-earth elevations for one point or an ordered batch of points.",
     description=(
         "Coordinates are WGS 84 geographic longitude/latitude values (EPSG:4326). "

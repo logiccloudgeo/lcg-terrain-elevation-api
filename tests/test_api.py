@@ -33,6 +33,16 @@ def test_health_does_not_contact_provider(client: TestClient) -> None:
     assert payload["status"] == "ok"
     assert payload["service"] == "LCG Terrain Elevation API"
 
+def test_openapi_identity(client: TestClient) -> None:
+    response = client.get("/openapi.json")
+    payload = response.json()
+
+    assert response.status_code == 200
+    assert payload["info"]["title"] == "Logic Cloud Geo Terrain Elevation API"
+    assert payload["info"]["license"] == {
+        "name": "MIT",
+        "url": "https://opensource.org/license/mit",
+    }
 
 def test_single_point_response(client: TestClient) -> None:
     response = client.get(
