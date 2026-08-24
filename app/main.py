@@ -21,9 +21,9 @@ app = FastAPI(
     ),
     version=__version__,
     license_info={
-    "name": "MIT",
-    "url": "https://opensource.org/license/mit",
-},
+        "name": "MIT",
+        "url": "https://opensource.org/license/mit",
+    },
 )
 app.add_middleware(
     MaxRequestBodySizeMiddleware,
