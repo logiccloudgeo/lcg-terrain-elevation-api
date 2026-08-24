@@ -1,0 +1,17 @@
+site_name: Logic Cloud Geo Terrain Elevation API
+site_description: Public user and developer documentation for the terrain elevation API.
+repo_url: https://github.com/logiccloudgeo/lcg-terrain-elevation-api
+repo_name: logiccloudgeo/lcg-terrain-elevation-api
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - API reference: api.md
+  - Architecture: architecture.md
+  - Verification: verification.md
+  - ArcGIS Pro roadmap: arcgis-pro.md
+  - Public web interface: web-interface.md
+  - Elevation API examples: elevation-api-examples-notebook.md
+  - Topographic profile: topographic-profile-notebook.md
