@@ -16,22 +16,34 @@
     />
     <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.css" />
     <link rel="stylesheet" href="/static/css/site.css" />
+    <link rel="stylesheet" href="/static/css/terrain-pages.css" />
   </head>
   <body class="demo-page">
     <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="/" aria-label="Logic Cloud Geo home">
+      <a class="brand" href="https://logiccloudgeo.com/" aria-label="Logic Cloud Geo home">
         <span class="brand-mark" aria-hidden="true">LCG</span>
-        <span class="brand-name">Logic Cloud <strong>Geo</strong></span>
+        <span class="brand-name">Logic Cloud Geo <small>Geology · GIS · collaboration</small></span>
       </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" data-menu-toggle>
-        Menu
-      </button>
-      <nav class="site-nav" aria-label="Primary navigation" data-site-nav>
-        <a href="/">Home</a>
-        <a href="/elevation">Elevation service</a>
-        <a aria-current="page" href="/elevation/demo">Map demonstration</a>
-        <a href="/docs">API documentation</a>
+      <nav class="terrain-nav" aria-label="Primary navigation">
+        <a href="https://logiccloudgeo.com/">Home</a>
+        <a href="/elevation">Terrain</a>
+        <a href="https://logiccloudgeo.com/subsurface/">Subsurface</a>
+        <a href="https://logiccloudgeo.com/arcgis-maps/">ArcGIS Maps</a>
+        <a href="https://logiccloudgeo.com/articles/">Articles</a>
+        <a href="https://logiccloudgeo.com/science/">LCG Insights</a>
+        <a href="https://logiccloudgeo.com/workbench/">Workbench</a>
+        <details>
+          <summary><span aria-hidden="true">☰</span> Menu</summary>
+          <div class="terrain-menu">
+            <a href="https://logiccloudgeo.com/projects/">Projects</a>
+            <a href="https://logiccloudgeo.com/#services">Services &amp; Training</a>
+            <a href="https://logiccloudgeo.com/science/">LCG Insights</a>
+            <a href="/elevation/demo" aria-current="page">Terrain map</a>
+            <a href="/docs">API documentation</a>
+            <a href="https://logiccloudgeo.com/membership/">Account</a>
+          </div>
+        </details>
       </nav>
     </header>
 
@@ -164,18 +176,21 @@
 
     <footer class="site-footer">
       <div>
-        <a class="brand brand-footer" href="/">
+        <a class="brand brand-footer" href="https://logiccloudgeo.com/">
           <span class="brand-mark" aria-hidden="true">LCG</span>
-          <span class="brand-name">Logic Cloud <strong>Geo</strong></span>
+          <span class="brand-name">Logic Cloud Geo</span>
         </a>
-        <p>Practical geospatial services and demonstrations.</p>
+        <p>Geology · GIS · collaboration</p>
       </div>
       <div class="footer-links">
-        <a href="mailto:lesterw@logiccloudgeo.com">lesterw@logiccloudgeo.com</a>
-        <a href="/elevation">Service details</a>
+        <a href="https://logiccloudgeo.com/projects/">LCG projects</a>
+        <a href="/elevation">Terrain API overview</a>
+        <a href="/elevation/demo">Try terrain elevation</a>
         <a href="/docs">API documentation</a>
+        <a href="/health">Service health</a>
+        <a href="mailto:lesterw@logiccloudgeo.com">lesterw@logiccloudgeo.com</a>
       </div>
-      <p class="footer-meta">© <span data-current-year></span> Logic Cloud Geo</p>
+      <p class="footer-meta">Logic Cloud Geo is an independent project. Elevation data are provided by the U.S. Geological Survey.</p>
     </footer>
 
     <script src="https://unpkg.com/maplibre-gl@5.24.0/dist/maplibre-gl.js"></script>

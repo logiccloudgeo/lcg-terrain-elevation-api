@@ -7,7 +7,7 @@
       name="description"
       content="Logic Cloud Geo USGS 3DEP elevation service documentation, notebooks, and web demonstration."
     />
-    <title>Elevation Service | Logic Cloud Geo</title>
+    <title>LCG Terrain API Tool | Logic Cloud Geo</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -15,22 +15,34 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/static/css/site.css" />
+    <link rel="stylesheet" href="/static/css/terrain-pages.css" />
   </head>
   <body>
     <a class="skip-link" href="#main-content">Skip to content</a>
     <header class="site-header">
-      <a class="brand" href="/" aria-label="Logic Cloud Geo home">
+      <a class="brand" href="https://logiccloudgeo.com/" aria-label="Logic Cloud Geo home">
         <span class="brand-mark" aria-hidden="true">LCG</span>
-        <span class="brand-name">Logic Cloud <strong>Geo</strong></span>
+        <span class="brand-name">Logic Cloud Geo <small>Geology · GIS · collaboration</small></span>
       </a>
-      <button class="menu-toggle" type="button" aria-expanded="false" data-menu-toggle>
-        Menu
-      </button>
-      <nav class="site-nav" aria-label="Primary navigation" data-site-nav>
-        <a href="/">Home</a>
-        <a aria-current="page" href="/elevation">Elevation service</a>
-        <a href="/elevation/demo">Map demonstration</a>
-        <a href="/docs">API documentation</a>
+      <nav class="terrain-nav" aria-label="Primary navigation">
+        <a href="https://logiccloudgeo.com/">Home</a>
+        <a href="/elevation" aria-current="page">Terrain</a>
+        <a href="https://logiccloudgeo.com/subsurface/">Subsurface</a>
+        <a href="https://logiccloudgeo.com/arcgis-maps/">ArcGIS Maps</a>
+        <a href="https://logiccloudgeo.com/articles/">Articles</a>
+        <a href="https://logiccloudgeo.com/science/">LCG Insights</a>
+        <a href="https://logiccloudgeo.com/workbench/">Workbench</a>
+        <details>
+          <summary><span aria-hidden="true">☰</span> Menu</summary>
+          <div class="terrain-menu">
+            <a href="https://logiccloudgeo.com/projects/">Projects</a>
+            <a href="https://logiccloudgeo.com/#services">Services &amp; Training</a>
+            <a href="https://logiccloudgeo.com/science/">LCG Insights</a>
+            <a href="/elevation/demo">Terrain map</a>
+            <a href="/docs">API documentation</a>
+            <a href="https://logiccloudgeo.com/membership/">Account</a>
+          </div>
+        </details>
       </nav>
     </header>
 
@@ -38,11 +50,8 @@
       <section class="page-hero contour-field">
         <div>
           <p class="eyebrow">Logic Cloud Geo service 01</p>
-          <h1>USGS 3DEP elevation, through a small and explicit API.</h1>
-          <p class="hero-lead">
-            Submit WGS 84 coordinates and receive bare-earth elevations with units, horizontal
-            reference, dataset, resolution, provider, and vertical-reference metadata.
-          </p>
+          <h1>LCG Terrain API tool</h1>
+          <p class="hero-lead">USGS 3DEP elevation, through a small and explicit API.</p>
           <div class="button-row">
             <a class="button button-primary" href="/elevation/demo">Try the map</a>
             <a class="button button-secondary" href="/docs">Open API documentation</a>
@@ -63,7 +72,13 @@
         <div><span>Output units</span><strong>Meters or feet</strong></div>
       </section>
 
-      <section class="section two-column">
+      <section class="section notice-panel" aria-labelledby="how-it-works">
+        <h2 id="how-it-works">How it works</h2>
+        <p>The <a href="https://www.usgs.gov/3d-elevation-program/about-3dep-products-services">USGS 3D Elevation Program</a> publishes digital elevation models of the bare ground. The LCG service uses Py3DEP to sample USGS terrain at a nominal 1/3 arc-second spacing, about 10 meters.</p>
+        <p>Submit WGS 84 latitude and longitude. The API validates the coordinates, retrieves elevations, and returns meters or international feet with dataset and reference metadata. For a profile, sample coordinates along a line, query them as a batch, and plot elevation against distance.</p>
+      </section>
+
+      <section class="section two-column" id="try-requests">
         <div>
           <p class="eyebrow">Service contract</p>
           <h2>One point or an ordered batch.</h2>
@@ -78,13 +93,29 @@
             <span class="method method-get">GET</span>
             <code>/api/v1/elevation</code>
             <p>Latitude, longitude, and requested units.</p>
+            <pre><code>GET /api/v1/elevation?latitude=30.4383&amp;longitude=-84.2807&amp;units=meters</code></pre>
+            <a class="button button-secondary" href="/api/v1/elevation?latitude=30.4383&amp;longitude=-84.2807&amp;units=meters" data-example="point">Run point example</a>
           </article>
           <article class="endpoint-card">
             <span class="method method-post">POST</span>
             <code>/api/v1/elevations</code>
             <p>An ordered list of keyed points, with a 500-point request maximum.</p>
+            <pre><code id="terrain-batch-example">{
+  "units": "meters",
+  "points": [
+    {"db_key": "A", "latitude": 30.4383, "longitude": -84.2807},
+    {"db_key": "B", "latitude": 30.4420, "longitude": -84.2850}
+  ]
+}</code></pre>
+            <button type="button" class="button button-secondary" data-example="batch">Run batch example</button>
           </article>
         </div>
+      </section>
+
+      <section class="section notice-panel" aria-labelledby="terrain-response-title">
+        <h2 id="terrain-response-title">Live API response</h2>
+        <p id="terrain-request-status" role="status">Run either example to view the HTTP status and response JSON.</p>
+        <pre id="terrain-response" tabindex="0" aria-label="Response JSON" hidden></pre>
       </section>
 
       <section class="section validation-panel">
@@ -112,8 +143,7 @@
             <h2>Reviewed Jupyter notebook examples.</h2>
           </div>
           <p>
-            Each notebook uses the public HTTPS API and keeps the request, validation, and export
-            steps visible for adaptation.
+            These Python notebooks show how to retrieve USGS terrain elevations through the public LCG API. Run the examples in Jupyter, then adapt the coordinates and inputs to your own project.
           </p>
         </div>
         <div class="download-grid">
@@ -121,8 +151,7 @@
             <span class="file-badge">IPYNB</span>
             <h3>Elevation API examples</h3>
             <p>
-              A compact introduction covering one coordinate, a keyed point list, and a pandas
-              join back to the source table.
+              Send a GET request for one coordinate and a POST request for a keyed batch. Read the response and join the results back to the original point table with pandas.
             </p>
             <a class="button button-primary" href="/downloads/elevation-api-examples.ipynb" download
               >Download notebook</a
@@ -132,8 +161,7 @@
             <span class="file-badge">IPYNB</span>
             <h3>Topographic profile</h3>
             <p>
-              Validates ordered coordinates, batches service requests, measures WGS 84 geodesic
-              distance, charts a profile, and exports CSV and GeoJSON.
+              Validate an ordered transect, retrieve its elevations in batches, and measure WGS 84 geodesic distance along the line. Plot the profile and export the results as CSV or GeoJSON.
             </p>
             <a class="button button-primary" href="/downloads/topographic-profile.ipynb" download
               >Download notebook</a
@@ -154,19 +182,22 @@
 
     <footer class="site-footer">
       <div>
-        <a class="brand brand-footer" href="/">
+        <a class="brand brand-footer" href="https://logiccloudgeo.com/">
           <span class="brand-mark" aria-hidden="true">LCG</span>
-          <span class="brand-name">Logic Cloud <strong>Geo</strong></span>
+          <span class="brand-name">Logic Cloud Geo</span>
         </a>
-        <p>Practical geospatial services and demonstrations.</p>
+        <p>Geology · GIS · collaboration</p>
       </div>
       <div class="footer-links">
-        <a href="mailto:lesterw@logiccloudgeo.com">lesterw@logiccloudgeo.com</a>
+        <a href="https://logiccloudgeo.com/projects/">LCG projects</a>
+        <a href="/elevation">Terrain API overview</a>
+        <a href="/elevation/demo">Try terrain elevation</a>
         <a href="/docs">API documentation</a>
         <a href="/health">Service health</a>
+        <a href="mailto:lesterw@logiccloudgeo.com">lesterw@logiccloudgeo.com</a>
       </div>
-      <p class="footer-meta">© <span data-current-year></span> Logic Cloud Geo</p>
+      <p class="footer-meta">Logic Cloud Geo is an independent project. Elevation data are provided by the U.S. Geological Survey.</p>
     </footer>
-    <script src="/static/js/site.js" defer></script>
+    <script src="/static/js/terrain-examples.js" defer></script>
   </body>
 </html>

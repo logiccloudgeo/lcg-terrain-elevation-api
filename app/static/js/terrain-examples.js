@@ -1,0 +1,45 @@
+(() => {
+  const point = document.querySelector('[data-example="point"]');
+  const batch = document.querySelector('[data-example="batch"]');
+  const status = document.querySelector("#terrain-request-status");
+  const output = document.querySelector("#terrain-response");
+  const requestBody = document.querySelector("#terrain-batch-example");
+  let activeRequest;
+
+  async function run(url, options) {
+    activeRequest?.abort();
+    const controller = new AbortController();
+    activeRequest = controller;
+    status.textContent = "Requesting elevations…";
+    output.hidden = true;
+    const timeout = setTimeout(() => controller.abort(), 30000);
+    try {
+      const response = await fetch(url, { ...options, signal: controller.signal });
+      const body = await response.text();
+      if (activeRequest !== controller) return;
+      status.textContent = "HTTP " + response.status + (response.ok ? " · Response received" : " · Request failed");
+      try {
+        output.textContent = JSON.stringify(JSON.parse(body), null, 2);
+      } catch {
+        output.textContent = body;
+      }
+      output.hidden = false;
+    } catch {
+      if (activeRequest !== controller) return;
+      status.textContent = controller.signal.aborted ? "The request timed out. Try again." : "Could not reach the Terrain API. Try again.";
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+
+  point.addEventListener("click", event => {
+    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    void run(point.href);
+  });
+  batch.addEventListener("click", () => void run("/api/v1/elevations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: requestBody.textContent,
+  }));
+})();
