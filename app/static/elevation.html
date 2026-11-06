@@ -87,21 +87,22 @@
             endpoint accepts as many as 500 uniquely keyed coordinates and returns them in request
             order, making it suitable for GIS joins and profile workflows.
           </p>
+          <p>Set <code>units</code> to <code>feet</code> or <code>meters</code> in either request to choose the elevation units.</p>
         </div>
         <div class="endpoint-list">
           <article class="endpoint-card">
             <span class="method method-get">GET</span>
             <code>/api/v1/elevation</code>
             <p>Latitude, longitude, and requested units.</p>
-            <pre><code>GET /api/v1/elevation?latitude=30.4383&amp;longitude=-84.2807&amp;units=meters</code></pre>
-            <a class="button button-secondary" href="/api/v1/elevation?latitude=30.4383&amp;longitude=-84.2807&amp;units=meters" data-example="point">Run point example</a>
+            <pre><code>GET /api/v1/elevation?latitude=30.4383&amp;longitude=-84.2807&amp;units=feet</code></pre>
+            <a class="button button-secondary" href="/api/v1/elevation?latitude=30.4383&amp;longitude=-84.2807&amp;units=feet" data-example="point">Run point example</a>
           </article>
           <article class="endpoint-card">
             <span class="method method-post">POST</span>
             <code>/api/v1/elevations</code>
             <p>An ordered list of keyed points, with a 500-point request maximum.</p>
             <pre><code id="terrain-batch-example">{
-  "units": "meters",
+  "units": "feet",
   "points": [
     {"db_key": "A", "latitude": 30.4383, "longitude": -84.2807},
     {"db_key": "B", "latitude": 30.4420, "longitude": -84.2850}
@@ -114,7 +115,8 @@
 
       <section class="section notice-panel" aria-labelledby="terrain-response-title">
         <h2 id="terrain-response-title">Live API response</h2>
-        <p id="terrain-request-status" role="status">Run either example to view the HTTP status and response JSON.</p>
+        <p id="terrain-request-url" style="overflow-wrap: anywhere" hidden><small></small></p>
+        <p id="terrain-request-status" role="status">Run either example to view the request URL and response JSON.</p>
         <pre id="terrain-response" tabindex="0" aria-label="Response JSON" hidden></pre>
       </section>
 
