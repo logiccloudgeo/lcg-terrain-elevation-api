@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from fastapi import APIRouter, HTTPException, status
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, RedirectResponse
 
 PACKAGE_ROOT = Path(__file__).resolve().parent
 PROJECT_ROOT = PACKAGE_ROOT.parent
@@ -31,11 +31,11 @@ async def home_page() -> FileResponse:
     return _page("index.html")
 
 
-@router.get("/elevation", response_class=FileResponse)
-async def elevation_page() -> FileResponse:
-    """Serve the public elevation-service overview."""
+@router.get("/elevation", response_class=RedirectResponse)
+async def elevation_page() -> RedirectResponse:
+    """Forward readers to the runnable examples on the main website."""
 
-    return _page("elevation.html")
+    return RedirectResponse("https://logiccloudgeo.com/elevation/examples/", status_code=308)
 
 
 @router.get("/elevation/demo", response_class=FileResponse)

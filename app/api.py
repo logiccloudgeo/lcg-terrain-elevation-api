@@ -78,14 +78,15 @@ async def health() -> HealthResponse:
     )
 
 
+@router.get("/api/v1/elevation", response_model=SingleElevationResponse, include_in_schema=False)
 @router.get(
-    "/api/v1/elevation",
+    "/v1/point",
     response_model=SingleElevationResponse,
     tags=["Elevation"],
 )
 async def point_elevation(
-    latitude: LatitudeQuery,
     longitude: LongitudeQuery,
+    latitude: LatitudeQuery,
     service: ServiceDependency,
     units: ElevationUnits = ElevationUnits.METERS,
 ) -> SingleElevationResponse:
@@ -103,8 +104,9 @@ async def point_elevation(
     return SingleElevationResponse(**metadata, result=result)
 
 
+@router.post("/api/v1/elevations", response_model=BulkElevationResponse, include_in_schema=False)
 @router.post(
-    "/api/v1/elevations",
+    "/v1/batch",
     response_model=BulkElevationResponse,
     tags=["Elevation"],
 )

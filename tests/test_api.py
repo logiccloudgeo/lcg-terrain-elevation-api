@@ -48,7 +48,7 @@ def test_openapi_identity(client: TestClient) -> None:
 
 def test_single_point_response(client: TestClient) -> None:
     response = client.get(
-        "/api/v1/elevation",
+        "/v1/point",
         params={"latitude": 30.4383, "longitude": -84.2807, "units": "meters"},
     )
     payload = response.json()
@@ -60,7 +60,7 @@ def test_single_point_response(client: TestClient) -> None:
 
 def test_bulk_response_preserves_keys_and_reports_no_data(client: TestClient) -> None:
     response = client.post(
-        "/api/v1/elevations",
+        "/v1/batch",
         json={
             "units": "meters",
             "points": [
@@ -77,7 +77,7 @@ def test_bulk_response_preserves_keys_and_reports_no_data(client: TestClient) ->
 
 def test_invalid_bulk_request_never_reaches_service(client: TestClient) -> None:
     response = client.post(
-        "/api/v1/elevations",
+        "/v1/batch",
         json={
             "points": [
                 {"db_key": "=FORMULA", "latitude": 30.0, "longitude": -84.0},
@@ -89,7 +89,7 @@ def test_invalid_bulk_request_never_reaches_service(client: TestClient) -> None:
 
 def test_batch_limit_returns_413(client: TestClient) -> None:
     response = client.post(
-        "/api/v1/elevations",
+        "/v1/batch",
         json={
             "points": [
                 {"db_key": f"P-{index}", "latitude": 30.0, "longitude": -84.0} for index in range(3)
@@ -102,7 +102,7 @@ def test_batch_limit_returns_413(client: TestClient) -> None:
 
 def test_request_body_limit_returns_413(client: TestClient) -> None:
     response = client.post(
-        "/api/v1/elevations",
+        "/v1/batch",
         content=b"x" * 1_000_001,
         headers={"Content-Type": "application/json"},
     )
@@ -112,7 +112,7 @@ def test_request_body_limit_returns_413(client: TestClient) -> None:
 
 def test_invalid_query_coordinate_returns_422(client: TestClient) -> None:
     response = client.get(
-        "/api/v1/elevation",
+        "/v1/point",
         params={"latitude": 91, "longitude": -84},
     )
     assert response.status_code == 422

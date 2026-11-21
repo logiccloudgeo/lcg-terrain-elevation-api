@@ -19,13 +19,12 @@ def test_home_page_replaces_api_redirect() -> None:
     assert 'href="/elevation/demo"' in response.text
 
 
-def test_elevation_service_page_links_notebooks() -> None:
+def test_elevation_overview_redirects_to_the_main_website() -> None:
     with TestClient(app) as client:
-        response = client.get("/elevation")
+        response = client.get("/elevation", follow_redirects=False)
 
-    assert response.status_code == 200
-    assert "/downloads/elevation-api-examples.ipynb" in response.text
-    assert "/downloads/topographic-profile.ipynb" in response.text
+    assert response.status_code == 308
+    assert response.headers["location"] == "https://logiccloudgeo.com/elevation/examples/"
 
 
 def test_map_demonstration_contains_accessible_workspace() -> None:

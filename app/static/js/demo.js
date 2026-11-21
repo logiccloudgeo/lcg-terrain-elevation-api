@@ -292,7 +292,7 @@
       longitude: String(longitude),
       units: elements.units.value,
     });
-    const response = await fetch(`/api/v1/elevation?${query.toString()}`);
+    const response = await fetch(`/v1/point?${query.toString()}`);
     const payload = await parseApiResponse(response);
     state.resultMetadata = payload;
     state.resultRows = [
@@ -320,7 +320,7 @@
         latitude: sample.coordinate[1],
       })),
     };
-    const response = await fetch("/api/v1/elevations", {
+    const response = await fetch("/v1/batch", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(request),
