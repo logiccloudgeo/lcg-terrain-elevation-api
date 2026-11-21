@@ -39,7 +39,7 @@ Confirm that the selected kernel belongs to the repository’s `.venv`.
 The reviewed public endpoint is:
 
 ```text
-https://api.logiccloudgeo.com
+https://elevation.logiccloudgeo.com
 ```
 
 Users may change the notebook configuration to `http://127.0.0.1:8000` when running the API locally.

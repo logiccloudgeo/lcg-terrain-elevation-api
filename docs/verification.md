@@ -52,9 +52,9 @@ Remove-Item Env:RUN_LIVE_USGS_TESTS
 The following routes provide non-destructive operational checks:
 
 ```text
-https://api.logiccloudgeo.com/health
-https://api.logiccloudgeo.com/docs
-https://api.logiccloudgeo.com/elevation/demo
+https://elevation.logiccloudgeo.com/health
+https://elevation.logiccloudgeo.com/docs
+https://elevation.logiccloudgeo.com/elevation/demo
 ```
 
 The health route verifies that the FastAPI process is available without querying the upstream elevation provider. An elevation request additionally exercises the provider path.

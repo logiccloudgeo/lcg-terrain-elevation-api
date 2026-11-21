@@ -78,7 +78,6 @@ async def health() -> HealthResponse:
     )
 
 
-@router.get("/api/v1/elevation", response_model=SingleElevationResponse, include_in_schema=False)
 @router.get(
     "/v1/point",
     response_model=SingleElevationResponse,
@@ -104,7 +103,6 @@ async def point_elevation(
     return SingleElevationResponse(**metadata, result=result)
 
 
-@router.post("/api/v1/elevations", response_model=BulkElevationResponse, include_in_schema=False)
 @router.post(
     "/v1/batch",
     response_model=BulkElevationResponse,

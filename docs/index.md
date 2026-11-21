@@ -28,10 +28,10 @@ It is intended for:
 
 ## Public service
 
-- Service home: <https://api.logiccloudgeo.com/>
-- Map demonstration: <https://api.logiccloudgeo.com/elevation/demo>
-- OpenAPI documentation: <https://api.logiccloudgeo.com/docs>
-- Health check: <https://api.logiccloudgeo.com/health>
+- Service home: <https://elevation.logiccloudgeo.com/>
+- Map demonstration: <https://elevation.logiccloudgeo.com/elevation/demo>
+- OpenAPI documentation: <https://elevation.logiccloudgeo.com/docs>
+- Health check: <https://elevation.logiccloudgeo.com/health>
 
 ## Public source
 

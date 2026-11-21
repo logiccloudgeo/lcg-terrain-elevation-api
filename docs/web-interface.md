@@ -7,7 +7,7 @@
 | Route | Purpose |
 | --- | --- |
 | `/` | Terrain elevation API overview and links to the demonstration, notebooks, and OpenAPI documentation |
-| `/elevation` | Service contract, provenance, validation summary, and notebook downloads |
+| `/elevation` | Redirect to the runnable examples on the Logic Cloud Geo website |
 | `/elevation/demo` | MapLibre point and line demonstration |
 | `/downloads/elevation-api-examples.ipynb` | Reviewed single-point and keyed-list notebook |
 | `/downloads/topographic-profile.ipynb` | Reviewed topographic-profile notebook |
@@ -51,7 +51,7 @@ terrain tiles if availability guarantees become important.
 
 1. The user clicks the map once.
 2. A second click replaces the first point.
-3. **Analyze point** calls `GET /api/v1/elevation` with named latitude and longitude parameters.
+3. **Analyze point** calls `GET /v1/point` with named latitude and longitude parameters.
 4. The response is shown in the summary and result table.
 
 ### Line mode
@@ -64,7 +64,7 @@ terrain tiles if availability guarantees become important.
 5. Both endpoints are included and the request is capped at 200 points.
 6. Generated keys use `MAP-LINE-001`, `MAP-LINE-002`, and the same pattern for the remaining
    samples.
-7. One request is sent to `POST /api/v1/elevations`.
+7. One request is sent to `POST /v1/batch`.
 8. The response becomes map samples, summary statistics, a line-only SVG profile, a table, and a
    downloadable CSV.
 

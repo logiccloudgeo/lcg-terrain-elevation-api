@@ -14,7 +14,7 @@ The internal Py3DEP provider sends tuples in `(longitude, latitude)` order.
 ## Single point
 
 ```http
-GET /api/v1/elevation?latitude=30.4383&longitude=-84.2807&units=meters
+GET /v1/point?longitude=-84.2807&latitude=30.4383&units=meters
 ```
 
 `units` can be `meters` or `feet`. Feet are international feet.
@@ -22,7 +22,7 @@ GET /api/v1/elevation?latitude=30.4383&longitude=-84.2807&units=meters
 ## Bulk points
 
 ```http
-POST /api/v1/elevations
+POST /v1/batch
 Content-Type: application/json
 ```
 

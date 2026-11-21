@@ -14,10 +14,11 @@ The project includes:
 
 ## Live service
 
-- Service home: <https://api.logiccloudgeo.com/>
-- Terrain demonstration: <https://api.logiccloudgeo.com/elevation/demo>
-- Interactive OpenAPI documentation: <https://api.logiccloudgeo.com/docs>
-- Health check: <https://api.logiccloudgeo.com/health>
+- Service home: <https://elevation.logiccloudgeo.com/>
+- Runnable point and batch examples: <https://logiccloudgeo.com/elevation/examples/>
+- Terrain demonstration: <https://elevation.logiccloudgeo.com/elevation/demo>
+- Interactive OpenAPI documentation: <https://elevation.logiccloudgeo.com/docs>
+- Health check: <https://elevation.logiccloudgeo.com/health>
 
 ## Appropriate use
 
@@ -33,20 +34,20 @@ Returned elevations are samples from an approximately 10-meter bare-earth DEM. T
 ### Single point
 
 ```http
-GET /api/v1/elevation
+GET /v1/point
 ```
 
 Example:
 
 ```powershell
 Invoke-RestMethod `
-  -Uri "https://api.logiccloudgeo.com/api/v1/elevation?latitude=30.4383&longitude=-84.2807&units=feet"
+  -Uri "https://elevation.logiccloudgeo.com/v1/point?longitude=-84.2807&latitude=30.4383&units=feet"
 ```
 
 ### Ordered point list
 
 ```http
-POST /api/v1/elevations
+POST /v1/batch
 Content-Type: application/json
 ```
 

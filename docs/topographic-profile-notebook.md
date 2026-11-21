@@ -24,7 +24,7 @@ sample_data/florida_profile_points.csv
 3. Reads an ordered CSV containing `db_key`, latitude, and longitude.
 4. Validates identifiers, coordinate types, coordinate ranges, and sequence values locally.
 5. Divides the points into sequential batches no larger than the service limit.
-6. Sends each batch to `POST /api/v1/elevations` over HTTPS.
+6. Sends each batch to `POST /v1/batch` over HTTPS.
 7. Confirms that every returned `db_key` is present and remains in the expected order.
 8. Calculates segment and cumulative distance using the WGS 84 ellipsoid.
 9. Preserves `no_data` results as gaps rather than inventing elevations.
@@ -96,7 +96,7 @@ the software workflow. They do not represent a surveyed alignment.
 The notebook exposes these values near the top:
 
 ```python
-SERVICE_BASE_URL = "https://api.logiccloudgeo.com"
+SERVICE_BASE_URL = "https://elevation.logiccloudgeo.com"
 ELEVATION_UNITS = "feet"
 HORIZONTAL_UNITS = "miles"
 BATCH_SIZE = 250
